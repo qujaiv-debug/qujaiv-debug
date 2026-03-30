@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBSE Class 10 - सर्वश्रेष्ठ अध्ययन मंच | Top Study Platform</title>
+    <meta name="description" content="RBSE Class 10 के लिए पूर्ण अध्ययन समाधान। नोट्स, वीडियो, प्रश्न, क्विज़, प्रगति ट्रैकिंग और AI डाउट सॉल्वर। 90%+ अंक सुनिश्चित।">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Hindi + English -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        [data-theme="dark"] {
+            --glass-bg: rgba(0, 0, 0, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+        }
+        
+        * {
+            font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+        }
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bottom-nav {
+            backdrop-filter: blur(20px);
+            background: rgba(15, 15, 35, 0.95);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            stroke-dasharray: 251.2;
+            stroke-dashoffset: 251.2;
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .chat-bubble {
+            animation: chatAppear 0.3s ease-out;
+        }
+        
+        @keyframes chatAppear {
+            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-x-hidden" data-theme="dark">
+
+    <!-- Loading Screen -->
+    <div id="loader" class="fixed inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 z-50 flex items-center justify-center">
+        <div class="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-5 right-5 z-50 glass p-3 rounded-2xl shadow-2xl hover:scale-110 transition-all duration-300">
+        <i class="fas fa-moon text-xl"></i>
+    </button>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden flex items-center justify-center p-4">
+        <div class="glass w-full max-w-md p-8 rounded-3xl slide-in">
+            <div class="flex justify-end mb-6">
+                <button id="closeAuth" class="text-2xl hover:scale-110 transition-transform">&times;</button>
+            </div>
+            <div id="loginForm">
+                <h2 class="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <i class="fas fa-sign-in-alt mr-3"></i>लॉगिन करें
+                </h2>
+                <form id="loginFormSubmit">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">मोबाइल नंबर</label>
+                        <input type="tel" id="phone" placeholder="98XXXXXXXX" class="w-full glass p-4 rounded-2xl focus:outline-none focus:ring-4 ring-purple-500/30 transition-all" required>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 px-8 rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-xl">
+                        लॉगिन करें
+                    </button>
+                </form>
+                <p class="text-center mt-6 text-sm">नया हैं? <span id="showSignup" class="text-purple-400 font-semibold cursor-pointer hover:underline">साइनअप करें</span></p>
+            </div>
+            <div id="signupForm" class="hidden">
+                <h2 class="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                    <i class="fas fa-user-plus mr-3"></i>साइनअप करें
+                </h2>
+                <form id="signupFormSubmit">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">नाम</label>
+                        <input type="text" id="name" placeholder="आपका नाम" class="w-full glass p-4 rounded-2xl focus:outline-none focus:ring-4 ring-green-500/30 transition-all" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">मोबाइल नंबर</label>
+                        <input type="tel" id="signupPhone" placeholder="98XXXXXXXX" class="w-full glass p-4 rounded-2xl focus:outline-none focus:ring-4 ring-green-500/30 transition-all" required>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-4 px-8 rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-xl">
+                        साइनअप करें
+                    </button>
+                </form>
+                <p class="text-center mt-6 text-sm">पहले से हैं? <span id="showLogin" class="text-purple-400 font-semibold cursor-pointer hover:underline">लॉगिन करें</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass sticky top-0 z-30 p-4 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl">
+                    <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">RBSE Class 10</h1>
+                    <p class="text-xs text-purple-300 font-medium">90%+ अंक सुनिश्चित</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="searchBtn" class="p-2 hover:bg-white/10 rounded-xl transition-all">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+                <button id="loginBtn" class="glass px-4 py-2 rounded-xl font-medium hover:scale-105 transition-all">
+                    <i class="fas fa-user-circle mr-2"></i>लॉगिन
+                </button>
+                <div id="userProfile" class="hidden">
+                    <button id="profileBtn" class="flex items-center space-x-2 glass px-4 py-2 rounded-xl font-medium hover:scale-105 transition-all">
+                        <i class="fas fa-user"></i>
+                        <span id="userName">नाम</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden flex items-center justify-center p-4">
+        <div class="glass w-full max-w-2xl p-8 rounded-3xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold">खोजें</h2>
+                <button id="closeSearch" class="text-3xl hover:scale-110">&times;</button>
+            </div>
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="अध्याय, विषय, प्रश्न खोजें..." class="w-full glass p-6 rounded-3xl text-lg focus:outline-none focus:ring-4 ring-purple-500/30 pr-16">
+                <i class="fas fa-search absolute right-6 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
+            </div>
+            <div id="searchResults" class="mt-8 space-y-4"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-4 pb-24 md:pb-8">
+        <!-- Dashboard (Active when logged in) -->
+        <div id="dashboard" class="hidden">
+            <!-- Progress Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="glass p-8 rounded-3xl text-center slide-in">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-chart-line text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-green-400 mb-2" id="overallProgress">85%</h3>
+                    <p class="text-sm opacity-75">कुल प्रगति</p>
+                    <div class="w-24 h-24 mx-auto mt-4">
+                        <svg class="progress-ring w-full h-full">
+                            <circle class="progress-ring-circle stroke-green-400/20 fill-transparent stroke-8" cx="50%" cy="50%" r="40%"></circle>
+                            <circle class="progress-ring-circle stroke-green-400 fill-transparent stroke-8" cx="50%" cy="50%" r="40%" stroke-dashoffset="75"></circle>
+                        </svg>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-3xl slide-in">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-fire text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-blue-400 mb-2" id="streak">7</h3>
+                    <p class="text-sm opacity-75">दिनों का स्ट्रिक</p>
+                </div>
+                <div class="glass p-8 rounded-3xl slide-in">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-trophy text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-yellow-400 mb-2">12</h3>
+                    <p class="text-sm opacity-75">क्विज़ पूर्ण</p>
+                </div>
+                <div class="glass p-8 rounded-3xl slide-in">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-clock text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-400 mb-2" id="studyTime">4h 32m</h3>
+                    <p class="text-sm opacity-75">पढ़ाई का समय</p>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="glass p-8 rounded-3xl mb-8 slide-in">
+                <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-bolt mr-3 text-yellow-400"></i>तुरंत शुरू करें</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button class="glass p-6 rounded-2xl hover:scale-105 transition-all group" onclick="openQuiz()">
+                        <i class="fas fa-question-circle text-2xl text-blue-400 mb-3 group-hover:rotate-12 transition-all"></i>
+                        <div class="text-sm font-semibold">क्विज़</div>
+                    </button>
+                    <button class="glass p-6 rounded-2xl hover:scale-105 transition-all group" onclick="openDoubtSolver()">
+                        <i class="fas fa-robot text-2xl text-purple-400 mb-3 group-hover:-translate-y-1 transition-all"></i>
+                        <div class="text-sm font-semibold">AI मदद</div>
+                    </button>
+                    <button class="glass p-6 rounded-2xl hover:scale-105 transition-all group" onclick="navigateTo('weak-areas')">
+                        <i class="fas fa-exclamation-triangle text-2xl text-orange-400 mb-3 group-hover:animate-pulse"></i>
+                        <div class="text-sm font-semibold">कमजोर क्षेत्र</div>
+                    </button>
+                    <button class="glass p-6 rounded-2xl hover:scale-105 transition-all group" onclick="showDailyGoal()">
+                        <i class="fas fa-target text-2xl text-green-400 mb-3 group-hover:scale-110 transition-all"></i>
+                        <div class="text-sm font-semibold">दैनिक लक्ष्य</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subjects Grid -->
+        <div id="subjectsGrid">
+            <div class="glass p-8 rounded-3xl mb-8 slide-in">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+                    <div>
+                        <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-4">
+                            RBSE Class 10
+                        </h1>
+                        <p class="text-xl opacity-90 max-w-2xl">सभी विषयों के लिए पूर्ण अध्ययन सामग्री। नोट्स, वीडियो, प्रश्न, PYQs और क्विज़।</p>
+                    </div>
+                    <div class="mt-6 md:mt-0">
+                        <button onclick="showSubjects()" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-12 py-6 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300">
+                            <i class="fas fa-rocket mr-3"></i>शुरू करें
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12" id="subjects">
+                <!-- Subjects will be populated by JS -->
+            </div>
+        </div>
+
+        <!-- Subject Detail Page -->
+        <div id="subjectDetail" class="hidden">
+            <div class="glass p-8 rounded-3xl mb-8 slide-in">
+                <div class="flex items-center space-x-4 mb-8">
+                    <button id="backToSubjects" class="glass p-4 rounded-2xl hover:scale-110 transition-all">
+                        <i class
